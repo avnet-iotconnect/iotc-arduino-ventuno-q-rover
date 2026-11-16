@@ -494,7 +494,5 @@ Send `trim 100 100 100 100` to clear it.
   [Arduino App Lab](https://docs.arduino.cc/software/app-lab/)
 - [Adafruit Motor Shield V2 guide](https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino)
 - [/IOTCONNECT Python Lite SDK](https://github.com/avnet-iotconnect/iotc-python-lite-sdk)
-- [iotc-mchp-dspic33](https://github.com/avnet-iotconnect/iotc-mchp-dspic33), the same rover chassis driven by
-  a Microchip dsPIC33AK Curiosity board, an RNWF11 Wi-Fi module and a DC Motor 22 Click.
-  Its motor driver has two channels, one per diagonal wheel pair, so it can't rotate in place,
-  and its wheels are trimmed in pairs instead of one at a time
+- [iotc-mchp-dspic33](https://github.com/avnet-iotconnect/iotc-mchp-dspic33) (same rover chassis driven by
+  a Microchip dsPIC33AK Curiosity board)
