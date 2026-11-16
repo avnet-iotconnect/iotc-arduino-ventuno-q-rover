@@ -348,6 +348,11 @@ board's USB-C port.
 
 <img src="media/secure-battery.png" width="500"/>
 
+> [!NOTE]
+> When you first connect the board, the power bank may not start supplying power on its own.
+> Press the power bank's button once to wake it and boot the board.
+> The board draws enough current to keep the power bank on after that.
+
 ### Cable Management
 
 Use zip ties to bundle the motor leads and extension wires against the chassis,
