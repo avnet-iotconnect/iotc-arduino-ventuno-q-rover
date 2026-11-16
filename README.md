@@ -219,24 +219,16 @@ The wheels are named from that end as front-left (FL), front-right (FR), rear-le
 
 The kit has two mirror-image types of mecanum wheel, with their rollers angled in opposite directions.
 FL and RR are one type, and FR and RL are the other.
-Seen from above, the rollers on top of each wheel point toward the center of the rover, forming an X:
-
-```
-             FRONT
-     +---+           +---+
-  FL |\\\|           |///| FR
-     |\\\|           |///|
-     +---+           +---+
-
-     +---+           +---+
-  RL |///|           |\\\| RR
-     |///|           |\\\|
-     +---+           +---+
-             REAR
-```
-
+Seen from above, the rollers on top of each wheel point toward the center of the rover, forming an X.
 The rollers on the bottom of the wheels, touching the ground, form the opposite pattern.
-Check the rollers from above.
+Match your wheels to these photos:
+
+<table>
+  <tr>
+    <td align="center"><img src="media/front-wheels.png" width="350"><br>Front, with FR on the left and FL on the right</td>
+    <td align="center"><img src="media/rear-wheels.png" width="350"><br>Rear, with RL on the left and RR on the right</td>
+  </tr>
+</table>
 
 ### Motor Shield Headers
 
