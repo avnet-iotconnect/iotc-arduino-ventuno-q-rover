@@ -1,0 +1,1 @@
+iotconnect-sdk-lite==1.3.0

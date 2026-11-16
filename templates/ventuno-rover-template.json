@@ -1,0 +1,159 @@
+{
+ "code": "vqrover",
+ "name": "vqrover",
+ "authType": 2,
+ "attributes": [
+  {
+   "name": "drv",
+   "type": "INTEGER",
+   "description": "Motor shield status: 0 = not found on I2C, 1 = OK",
+   "unit": "",
+   "aggregateTypes": []
+  },
+  {
+   "name": "cmd",
+   "type": "STRING",
+   "description": "Last command the rover accepted",
+   "unit": "",
+   "aggregateTypes": []
+  },
+  {
+   "name": "up",
+   "type": "INTEGER",
+   "description": "Seconds since the rover app last started",
+   "unit": "s",
+   "aggregateTypes": []
+  },
+  {
+   "name": "tfl",
+   "type": "INTEGER",
+   "description": "Front-left wheel speed trim, percent of commanded speed (see the trim command)",
+   "unit": "%",
+   "aggregateTypes": []
+  },
+  {
+   "name": "tfr",
+   "type": "INTEGER",
+   "description": "Front-right wheel speed trim, percent of commanded speed",
+   "unit": "%",
+   "aggregateTypes": []
+  },
+  {
+   "name": "trl",
+   "type": "INTEGER",
+   "description": "Rear-left wheel speed trim, percent of commanded speed",
+   "unit": "%",
+   "aggregateTypes": []
+  },
+  {
+   "name": "trr",
+   "type": "INTEGER",
+   "description": "Rear-right wheel speed trim, percent of commanded speed",
+   "unit": "%",
+   "aggregateTypes": []
+  }
+ ],
+ "commands": [
+  {
+   "name": "Stop",
+   "command": "stop",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Forward (speed 0-100, optional time ms)",
+   "command": "forward",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Backward (speed 0-100, optional time ms)",
+   "command": "backward",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Strafe Left (speed 0-100, optional time ms)",
+   "command": "left",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Strafe Right (speed 0-100, optional time ms)",
+   "command": "right",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Rotate Left (speed 0-100, optional time ms)",
+   "command": "rotate-left",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Rotate Right (speed 0-100, optional time ms)",
+   "command": "rotate-right",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Move (forward right, each -100-100, optional time ms)",
+   "command": "move",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Drive (forward right rotate, each -100-100, optional time ms)",
+   "command": "drive",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Wheels (FL FR RL RR, each -100-100, optional time ms)",
+   "command": "wheels",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Wheel Pairs (FL+RR FR+RL, each -100-100, optional time ms)",
+   "command": "pairs",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Trim Wheel Speeds (FL FR RL RR, or FL+RR FR+RL, each 50-100)",
+   "command": "trim",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Motor Shield Diagnostics (status returned in the ack)",
+   "command": "diag",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  }
+ ],
+ "messageVersion": "2.1",
+ "capability": "0",
+ "properties": {
+  "description": null,
+  "dataFrequency": "10",
+  "fileSupport": false
+ },
+ "_meta": {
+  "version": "2.0"
+ }
+}

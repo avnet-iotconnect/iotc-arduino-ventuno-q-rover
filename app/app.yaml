@@ -1,0 +1,3 @@
+name: Mecanum Rover
+icon: 🚗
+description: Drives a four-wheel mecanum rover from /IOTCONNECT commands.

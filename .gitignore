@@ -1,0 +1,40 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+
+# /IOTCONNECT device credentials, copied onto the board by the user
+app/iotcDeviceConfig.json
+*.pem
+*.crt
+*.key
+
+# Per-rover trim, saved by the app at runtime
+app/trim.json
+
+# Arduino App Lab build cache
+app/.cache/
+
+# Dashboard deployment artifacts
+dashboard/lambda.zip
+
+# General temp files
+*.log
+*.tmp
+*.bak
+*.orig
+
+# Temporary (typically AI agent) work files
+/work*/
