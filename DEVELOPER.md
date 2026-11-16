@@ -54,10 +54,10 @@ All four are scaled down together if any is over 100%. Each wheel's trim then sc
 `wheel_map` in `app/sketch/sketch.ino` sets the shield channel and direction of each wheel:
 
 ```cpp
-    {4, true},  // front-left
-    {2, false}, // front-right
-    {3, false}, // rear-left
-    {1, true},  // rear-right
+    {4, false}, // front-left
+    {2, true},  // front-right
+    {3, true},  // rear-left
+    {1, false}, // rear-right
 ```
 
 To use a different wiring, or to make the other end of the rover the front, change the channel numbers
