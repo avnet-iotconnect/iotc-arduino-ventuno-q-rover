@@ -13,10 +13,8 @@
 # browser. This script just stands up the compute.
 #
 # Optional environment variables:
-#   TEMPLATE_GUID    this project's vqrover device-template GUID (Settings ->
-#                    Device -> Templates in the /IOTCONNECT console) - narrows
-#                    every signed-in user's device picker to just this
-#                    template; leave unset to show every device they can see
+#   TEMPLATE_CODE    device-template code the device picker is limited to
+#                    (default vqrover, set to "" to list every device)
 #   AWS_REGION       default us-east-1
 #   FUNCTION_NAME    default vq-rover-dashboard-api
 #   ROLE_NAME        default vq-rover-dashboard-lambda
@@ -28,7 +26,7 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TEMPLATE_GUID="${TEMPLATE_GUID:-}"
+TEMPLATE_CODE="${TEMPLATE_CODE-vqrover}"
 AWS_REGION="${AWS_REGION:-us-east-1}"
 FUNCTION_NAME="${FUNCTION_NAME:-vq-rover-dashboard-api}"
 ROLE_NAME="${ROLE_NAME:-vq-rover-dashboard-lambda}"
@@ -62,8 +60,7 @@ echo "== Lambda: $FUNCTION_NAME"
 ENV_JSON=$(python3 -c "
 import json
 env = {}
-if '$TEMPLATE_GUID':
-    env['TEMPLATE_GUID'] = '$TEMPLATE_GUID'
+env['TEMPLATE_CODE'] = '$TEMPLATE_CODE'
 print(json.dumps({'Variables': env}))
 ")
 if aws lambda get-function --function-name "$FUNCTION_NAME" --region "$AWS_REGION" >/dev/null 2>&1; then

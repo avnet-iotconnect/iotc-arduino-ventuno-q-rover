@@ -26,6 +26,7 @@ container with the app folder mounted at `/app`.
 | `app/python/requirements.txt` | Python packages, installed into the app's container on first start |
 | `tools/setup_rover.sh` / `.ps1` | Run on the PC. Send `tools/board_setup.sh` and the app to the board over SSH |
 | `tools/board_setup.sh` | Runs on the board. Creates the certificate, then builds and starts the app |
+| `tools/make_download_zip.sh` | Builds `dist/ventuno-q-rover.zip`, the user download from the README's step 2 |
 | `templates/ventuno-rover-template.json` | /IOTCONNECT device template (code `vqrover`) |
 
 ### Motor Control
@@ -114,3 +115,15 @@ It copies the app over, rebuilds the sketch and restarts the app.
 cd app/python
 python3 -c "from rover_commands import mix; print(mix(50, 0, 50))"
 ```
+
+## Download ZIP
+
+The README's step 2 has users download `ventuno-q-rover.zip` instead of cloning the repository.
+Rebuild it and upload it again after changing any file in `app/`, `tools/` or `templates/`:
+
+```bash
+bash tools/make_download_zip.sh
+aws s3 cp dist/ventuno-q-rover.zip s3://avnetpublicaccess/ventuno-q-rover.zip
+```
+
+Add any new file the user needs on their PC to the `FILES` list in `tools/make_download_zip.sh`.

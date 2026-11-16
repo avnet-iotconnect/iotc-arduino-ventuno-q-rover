@@ -213,8 +213,8 @@ async function boot(){
  try{b=await api("bootstrap");}
  catch(e){$("loginstatus").innerHTML='<span class="err">'+esc(e.message)+'</span>';$("loginbtn").disabled=false;S.booting=false;return}
  if(!b.devices.length){
-  $("loginstatus").innerHTML='<span class="err">No matching device on this account. Check TEMPLATE_GUID '
-   +'in the Lambda if you expected to see one.</span>';
+  $("loginstatus").innerHTML='<span class="err">No device on this account uses the vqrover template. '
+   +'Create the rover device from the template in templates/ventuno-rover-template.json.</span>';
   $("loginbtn").disabled=false;S.booting=false;return;
  }
  S.devices=b.devices;S.cmdsByTpl=b.commandsByTemplate||{};

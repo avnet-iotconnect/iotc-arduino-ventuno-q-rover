@@ -26,13 +26,14 @@ import json
 import os
 import traceback
 import urllib.parse
+from concurrent.futures import ThreadPoolExecutor
 
 from iotc_client import Client, IoTConnectError
 
-# Optional: this project's device-template GUID (Settings -> Device ->
-# Templates in the /IOTCONNECT console) to hide any other devices on the
-# account. Not a secret - it only narrows the device dropdown.
-TEMPLATE_GUID = os.environ.get("TEMPLATE_GUID", "")
+# Code of the template imported from templates/ventuno-rover-template.json.
+# The code is the same in every account, unlike the template's GUID.
+# Only devices on this template are listed. Set it to "" to list every device.
+TEMPLATE_CODE = os.environ.get("TEMPLATE_CODE", "vqrover")
 
 # discover() returns the same URLs for as long as a (solution key, env, pf)
 # is valid, so it's cached per warm Lambda instance instead of being repeated
@@ -44,6 +45,7 @@ _discovery_cache = {}
 TELEMETRY_MARKER = "drv"
 HISTORY_LOOKBACK_MIN = 10
 API_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"  # what /Telemetry/attribute-history expects
+TEMPLATE_LOOKUP_WORKERS = 8
 
 
 def iotc_client(solution_key, env, pf, user_token=None):
@@ -60,6 +62,25 @@ def iotc_client(solution_key, env, pf, user_token=None):
     if user_token:
         c.token = user_token
     return c
+
+
+def rover_template_guids(c):
+    tpls = c.templates().get("data", [])
+    guids = {t.get("guid") for t in tpls if (t.get("code") or "").lower() == TEMPLATE_CODE.lower()}
+    if not guids:
+        print("no template with code %r among %d templates (fields: %s)" % (
+            TEMPLATE_CODE, len(tpls), sorted(tpls[0]) if tpls else []))
+    return guids
+
+
+def template_commands(c, tpl):
+    try:
+        cmds = c._req("GET", c.urls["deviceBaseUrl"] + "/template-command/%s/lookup" % tpl)
+    except IoTConnectError as e:
+        # A template with no commands returns an empty body, which lands here too.
+        print("template-command lookup failed for %s: %s" % (tpl, e))
+        return {}
+    return {x.get("command"): x.get("guid") for x in cmds.get("data", []) if x.get("command")}
 
 
 def telemetry_base(c):
@@ -148,21 +169,16 @@ def dash(event, path, headers, body_raw):
     c = iotc_client(solution_key, env, pf, token)
     if path.endswith("/bootstrap"):
         devs = c.devices().get("data", [])
-        if TEMPLATE_GUID:
-            devs = [d for d in devs if d.get("deviceTemplateGuid") == TEMPLATE_GUID]
-        devs = devs[:50]
-        out = {"devices": [{"guid": d["guid"], "uniqueId": d["uniqueId"],
-                            "templateGuid": d.get("deviceTemplateGuid")} for d in devs],
-               "commandsByTemplate": {}}
-        for tpl in {d.get("deviceTemplateGuid") for d in devs if d.get("deviceTemplateGuid")}:
-            try:
-                cmds = c._req("GET", c.urls["deviceBaseUrl"] + "/template-command/%s/lookup" % tpl)
-                out["commandsByTemplate"][tpl] = {x.get("command"): x.get("guid")
-                                                  for x in cmds.get("data", []) if x.get("command")}
-            except IoTConnectError as e:
-                print("template-command lookup failed for %s: %s" % (tpl, e))
-                out["commandsByTemplate"][tpl] = {}
-        return resp(200, out)
+        if TEMPLATE_CODE:
+            rover_tpls = rover_template_guids(c)
+            devs = [d for d in devs if d.get("deviceTemplateGuid") in rover_tpls]
+        devs.sort(key=lambda d: (d.get("uniqueId") or "").lower())
+        tpls = {d.get("deviceTemplateGuid") for d in devs if d.get("deviceTemplateGuid")}
+        with ThreadPoolExecutor(max_workers=TEMPLATE_LOOKUP_WORKERS) as pool:
+            cmds_by_tpl = dict(zip(tpls, pool.map(lambda t: template_commands(c, t), tpls)))
+        return resp(200, {"devices": [{"guid": d["guid"], "uniqueId": d["uniqueId"],
+                                       "templateGuid": d.get("deviceTemplateGuid")} for d in devs],
+                          "commandsByTemplate": cmds_by_tpl})
 
     if path.endswith("/telemetry"):
         guid, duid = qs.get("guid") or "", qs.get("duid") or ""

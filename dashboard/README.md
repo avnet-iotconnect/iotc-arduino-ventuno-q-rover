@@ -68,9 +68,8 @@ To do the same steps by hand:
 2. **Zip & create the Lambda.**
    `zip -j lambda.zip lambda_function.py iotc_client.py dashboard.html`
    (all three files at the zip root), then create a Python 3.12 function from it.
-   You can optionally set the `TEMPLATE_GUID` env var to this project's `vqrover` device-template GUID
-   (Settings &rarr; Device &rarr; Templates in the /IOTCONNECT console)
-   to only list rover devices in the device picker.
+   The device picker only lists devices on the template with code `vqrover`.
+   Set the `TEMPLATE_CODE` env var to change the code, or to an empty value to list every device.
 3. **HTTP API.** Create an API Gateway HTTP API with a Lambda integration and a
    `$default` route (quick-create does this), then open the API's invoke URL.
 

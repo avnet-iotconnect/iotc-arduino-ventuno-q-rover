@@ -78,14 +78,9 @@ To drive the rover around without a power cord, power it from a USB-C PD power b
 
 ## 2. Get the Demo Source
 
-Download this repository as a ZIP (**Code** &rarr; **Download ZIP** at the top of the repository page)
-and extract it, or clone it:
+Download [ventuno-q-rover.zip](https://avnetpublicaccess.s3.us-east-1.amazonaws.com/ventuno-q-rover.zip) and extract it.
 
-```bash
-git clone https://github.com/avnet-iotconnect/iotc-arduino-ventuno-q-rover.git
-```
-
-The commands in this guide are run from the repository's top folder.
+The commands in this guide are run from the extracted `ventuno-q-rover` folder.
 
 On Windows, PowerShell blocks scripts downloaded from the internet by default.
 Allow them for the current PowerShell window with:
@@ -207,7 +202,7 @@ Running it again prints the same certificate instead of creating a new one.
 
 6. Click **Save & View**.
 7. On the device page, click the paper-and-cog icon above **Connection Info** to download the device
-   configuration file, and save it as `iotcDeviceConfig.json` in the repository's top folder:
+   configuration file, and save it as `iotcDeviceConfig.json` in the `ventuno-q-rover` folder:
 
    <img src="https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-lite-sdk-demos/main/common/media/paper-and-cog.png" width="400"/>
 

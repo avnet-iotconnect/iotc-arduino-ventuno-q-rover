@@ -38,3 +38,6 @@ dashboard/lambda.zip
 
 # Temporary (typically AI agent) work files
 /work*/
+
+# Download ZIP built by tools/make_download_zip.sh
+dist/
