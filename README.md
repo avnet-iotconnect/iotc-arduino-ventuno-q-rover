@@ -388,6 +388,9 @@ If it prints `no motor shield` instead, check that the shield sits fully on the 
 
 ## 10. Run the Demo
 
+The rover app starts running as soon as the setup script finishes, and starts again by itself every time
+the board boots.
+
 To drive the rover without a power cord, move the board's USB-C cable from the power supply to the
 power bank. The board restarts, and the rover app starts by itself about a minute later.
 
