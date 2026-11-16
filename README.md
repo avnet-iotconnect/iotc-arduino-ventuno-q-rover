@@ -215,6 +215,29 @@ to build the chassis.
 The **front** of the rover is the end the VENTUNO Q's heatsink and fan face once the board is mounted.
 The wheels are named from that end as front-left (FL), front-right (FR), rear-left (RL) and rear-right (RR).
 
+### Wheel Orientation
+
+The kit has two mirror-image types of mecanum wheel, with their rollers angled in opposite directions.
+FL and RR are one type, and FR and RL are the other.
+Seen from above, the rollers on top of each wheel point toward the center of the rover, forming an X:
+
+```
+             FRONT
+     +---+           +---+
+  FL |\\\|           |///| FR
+     |\\\|           |///|
+     +---+           +---+
+
+     +---+           +---+
+  RL |///|           |\\\| RR
+     |///|           |\\\|
+     +---+           +---+
+             REAR
+```
+
+The rollers on the bottom of the wheels, touching the ground, form the opposite pattern.
+Check the rollers from above.
+
 ### Motor Shield Headers
 
 The shield ships with its header pins loose. Solder them on by following Adafruit's
@@ -445,6 +468,11 @@ Every one should spin a single wheel **forward** for 2 seconds:
 
 Then put the rover on the floor and try `forward 40`, `right 40`, `move 25 25` (diagonal)
 and `rotate-right 40`.
+
+- **`right 40` moves the rover left:** all four wheels are on the wrong corners.
+  Swap FL with FR and RL with RR. See [Wheel Orientation](#wheel-orientation).
+- **`right 40` turns the rover, barely moves it or makes it shudder:** two of the wheels are on the wrong corners.
+  Check each wheel against [Wheel Orientation](#wheel-orientation).
 
 > [!TIP]
 > Mecanum wheels need grip. Run the demo on concrete, a rubber mat or low carpet.
