@@ -410,8 +410,7 @@ in the /IOTCONNECT console:
 
 ### Web Dashboard
 
-<!-- Screenshot placeholder: the dashboard, signed in, with the rover live -->
-<img src="media/dashboard.png" width="700"/>
+<img src="media/dashboard-drive.png" width="700"/>
 
 <!-- Link placeholder: the hosted dashboard URL, once it's deployed -->
 You can use this AWS-hosted dashboard to drive the rover. Open
@@ -426,6 +425,8 @@ The dashboard has three panels:
 - The **Advanced** panel exposes `move` (any mix of forward and sideways speed), `drive` (forward,
   sideways and rotation together), `wheels` (each wheel's speed directly) and `trim`.
 - The **Activity** log lists every command sent.
+
+<img src="media/dashboard-advanced.png" width="550"/>
 
 > [!NOTE]
 > This dashboard is already deployed and hosted, so you don't need an AWS account to use it.

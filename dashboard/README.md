@@ -1,6 +1,8 @@
 # Mecanum Rover Dashboard
 
-<img src="../media/dashboard.png" width="700"/>
+<img src="../media/dashboard-drive.png" width="700"/>
+
+<img src="../media/dashboard-advanced.png" width="550"/>
 
 A web dashboard for driving the rover. It has one button per move, with that move's parameters
 in labeled fields underneath it, and an activity log of the commands this browser has sent.
