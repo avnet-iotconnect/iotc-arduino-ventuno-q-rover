@@ -25,10 +25,10 @@ static const struct {
     int channel;
     bool is_reversed;
 } wheel_map[WHEEL_COUNT] = {
-    {4, false}, // front-left
-    {2, true},  // front-right
-    {3, true},  // rear-left
-    {1, false}, // rear-right
+    {4, true},  // front-left
+    {2, false}, // front-right
+    {3, false}, // rear-left
+    {1, true},  // rear-right
 };
 
 static Adafruit_MotorShield shield;
