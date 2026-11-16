@@ -135,18 +135,9 @@ The board's first-time setup runs on its own desktop, so it needs a monitor, key
 2. Power the board from the USB-C PD power supply. The first boot takes about 20-30 seconds.
 3. Arduino App Lab opens on the desktop. Follow its prompts to name the board (the default is `arduino`),
    set the password of the board's `arduino` user, and connect the board to your Wi-Fi network.
-   You'll use the name and password in the next steps.
-
-Your PC must be on the same network as the board. The board is reachable on it as `BOARDNAME.local`,
-where `BOARDNAME` is the name you gave it. With the default name, that's `arduino.local`.
-Check the connection from your PC:
-
-```bash
-ping arduino.local
-```
-
-If the ping fails, your network may not support `.local` names. Look up the board's IP address in the
-desktop's Wi-Fi settings, and use it in place of `arduino.local` in the commands that follow.
+   You'll use the name and password in later steps.
+4. Open a terminal on your board and use the command `ip a` to see the IP address. Note this address as
+   it will be needed later.
 
 The monitor, keyboard and mouse can then come off. The board reconnects to Wi-Fi after every power-up.
 
